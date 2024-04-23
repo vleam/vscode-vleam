@@ -1,0 +1,50 @@
+{
+  "name": "Vleam",
+  "scopeName": "source.vue.extended",
+  "injectionSelector": "L:source.vue",
+  "patterns": [
+    {
+      "begin": "(<)(script)\\b(?=[^>]*lang=('gleam'|\"gleam\"))(?![^/>]*/>\\s*$)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.html"
+        },
+        "2": {
+          "name": "entity.name.tag.script.html"
+        }
+      },
+      "end": "(</)(script)(>)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.html"
+        },
+        "2": {
+          "name": "entity.name.tag.script.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.html"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#tag-stuff"
+        },
+        {
+          "contentName": "source.gleam",
+          "begin": "(>)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.end.html"
+            }
+          },
+          "end": "(?=</script>)",
+          "patterns": [
+            {
+              "include": "source.gleam"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
