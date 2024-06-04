@@ -70,8 +70,8 @@ async function createLanguageClient(): Promise<LanguageClient | undefined> {
   };
 
   const serverOptions: ServerOptions = {
-    command: "vleam",
-    args: ["lsp"],
+    command: "npx",
+    args: ["vleam", "lsp"],
     options: {
       env: Object.assign(process.env, {
         GLEAM_LOG: "info",
