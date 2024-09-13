@@ -7,9 +7,7 @@
     let
       overlays = [
         (final: prev: rec {
-          nodejs = prev.nodejs_latest;
-          pnpm = prev.nodePackages.pnpm;
-          yarn = (prev.yarn.override { inherit nodejs; });
+          nodejs = prev.nodejs_20;
         })
       ];
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
@@ -20,7 +18,15 @@
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ vscodium node2nix nodejs pnpm yarn ];
+          packages = with pkgs; [
+            vscodium
+
+            node2nix
+            nodejs
+            pnpm
+            nodePackages.typescript-language-server
+            typescript
+          ];
         };
       });
     };
